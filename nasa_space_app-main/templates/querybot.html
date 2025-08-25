@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QueryBot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            width: 400px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        #response {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>QueryBot</h2>
+        <p>Enter a sentence with a <strong>[MASK]</strong> token:</p>
+        <input type="text" id="userInput" placeholder="e.g. [MASK] is the practice of cultivating crops.">
+        <button onclick="sendMessage()">Submit</button>
+
+        <div id="response"></div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            var userInput = document.getElementById('userInput').value;
+            if (!userInput.includes("[MASK]")) {
+                document.getElementById('response').innerHTML = "Error: Please include a [MASK] token.";
+                return;
+            }
+
+            fetch('/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ message: userInput }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('response').innerHTML = "Response: " + data.response;
+            })
+            .catch(error => {
+                document.getElementById('response').innerHTML = "Error: " + error;
+            });
+        }
+    </script>
+</body>
+</html>

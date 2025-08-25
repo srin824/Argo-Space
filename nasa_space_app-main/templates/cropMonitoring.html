@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Monitoring - NASA Satellite Technology</title>
+    <style>
+        /* Root variables for NASA-inspired colors */
+        :root {
+            --primary-color: #001F4D; /* NASA Blue */
+            --accent-color: #ff0000;  /* NASA Red */
+            --bg-color: #0c1a2b;      /* Dark Background */
+            --text-color: #ffffff;
+            --secondary-bg: #202c3e;  /* Darker gray for sections */
+            --font-family: 'Arial', sans-serif;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+        header {
+            background-color: var(--primary-color);
+            padding: 20px 0;
+            text-align: center;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #FFFFFF;
+            letter-spacing: 2px;
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+        .hero-section {
+            background-image: url('nasa-satellite.jpg');
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); /* Dark overlay */
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        .hero-content h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #FFFFFF;
+        }
+        .cta-button {
+            background-color: var(--accent-color);
+            color: var(--text-color);
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .cta-button:hover {
+            background-color: #ff5e5e;
+        }
+        .features-section {
+            background-color: var(--secondary-bg);
+            padding: 50px 20px;
+        }
+        .features-section h3 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5rem;
+            color: #FFFFFF;
+        }
+        .feature {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .feature div {
+            width: 30%;
+            padding: 20px;
+            background-color: var(--bg-color);
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+        }
+        .feature div h4 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            text-align: center;
+            color: #FFFFFF;
+        }
+        .feature div p {
+            text-align: center;
+            font-size: 1.2rem;
+        }
+        .map-section {
+            padding: 50px 20px;
+        }
+        .map-section iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
+        }
+        .data-dashboard {
+            background-color: var(--secondary-bg);
+            padding: 50px 20px;
+        }
+        .data-dashboard h3 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            color: #FFFFFF;
+        }
+        .data-dashboard .chart {
+            width: 80%;
+            margin: 0 auto;
+        }
+        .footer {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            padding: 20px;
+            text-align: center;
+        }
+        h4 a {
+            color: white;
+            text-decoration: none;
+        }
+        h4 a:hover {
+            color: red;
+        }
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .feature div {
+                width: 45%;
+            }
+        }
+        @media (max-width: 768px) {
+            .hero-content h2 {
+                font-size: 2rem;
+            }
+            .cta-button {
+                padding: 10px 20px;
+                font-size: 1.2rem;
+            }
+            .feature div {
+                width: 100%;
+            }
+            .data-dashboard .chart {
+                width: 100%;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero-content h2 {
+                font-size: 1.5rem;
+            }
+            .cta-button {
+                padding: 8px 16px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header with NASA style logo -->
+    <header>
+        <div class="logo">Crop Monitoring</div>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="#">Monitoring</a></li>
+                <li><a href="#">Data</a></li>
+                <li><a href="#">Insights</a></li>
+                <li><a href="#">Resources</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero section with call-to-action button -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h2>Track Crop Health with NASA Satellite Technology</h2>
+            <button class="cta-button">Explore Crop Data</button>
+        </div>
+    </section>
+
+    <!-- Features section -->
+    <section class="features-section">
+        <h3>Our Features</h3>
+        <div class="feature">
+            <div>
+                <h4>Real-time Monitoring</h4>
+                <p>Display crop conditions using NASA satellite imagery. Zoom in on regions to get localized data.</p>
+            </div>
+            <div>
+                <h4>Heatmaps</h4>
+                <p>Color-coded heatmaps show plant health from green (healthy) to red (stressed).</p>
+            </div>
+            <div>
+                <h4>Toggle Layers</h4>
+                <p>Layer satellite data for precipitation, soil moisture, and crop yield predictions.</p>
+            </div>
+        </div>
+        <div class="feature">
+            <div>
+                <h4><a href="/weather">Weather Forecast</a></h4>
+                <p>Get real-time weather forecasts and seasonal predictions for better crop planning.</p>
+            </div>
+            <div>
+                <h4>Pest Detection Alerts</h4>
+                <p>Receive alerts if NASA satellite data detects pest infestations in your crops.</p>
+            </div>
+            <div>
+                <h4>Soil Health Data</h4>
+                <p>View soil moisture and nutrients to optimize irrigation and crop planning.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Map section -->
+    <section class="map-section">
+        <h3>Interactive Satellite Map</h3>
+        <iframe src="https://embed.windy.com/"></iframe>
+    </section>
+
+    <!-- Data Dashboard section -->
+    <section class="data-dashboard">
+        <h3>Crop Health Dashboard</h3>
+        <div class="chart">
+            <img src="https://cdn.dribbble.com/userupload/9825964/file/original-e30a769281d06501f17c4d85788e8708.png?resize=1600x1200" width="100%" height="500px" alt="Dashboard Image">
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Powered by NASA Satellite Technology | &copy; 2024 Crop Monitoring</p>
+    </footer>
+
+</body>
+</html>

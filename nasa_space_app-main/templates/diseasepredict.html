@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disease Prediction</title>
+    <style>
+        /* Background Styling */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #001F3F, #005A99); /* NASA-inspired gradient */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+}
+
+/* Container Styling */
+.container {
+    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent white background */
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+    margin: 20px;
+    transition: transform 0.3s; /* Add a hover effect */
+}
+
+.container:hover {
+    transform: scale(1.05); /* Slightly scale up on hover */
+}
+
+/* Form Styling */
+form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    font-size: 18px;
+    margin-bottom: 5px;
+    display: block;
+    text-align: center;
+}
+
+input[type="file"] {
+    margin: 0;
+    font-size: 16px;
+    text-align: center;
+    padding: 0px 0;
+}
+
+button {
+    background-color: #FF4136; /* NASA red */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s, transform 0.2s; /* Transition for hover effects */
+}
+
+button:hover {
+    background-color: #FF851B; /* Slightly darker red */
+    transform: translateY(-2px); /* Lift effect on hover */
+}
+
+/* Predicted Result Styling */
+h2 {
+    margin-top: 30px;
+    color: white;
+}
+
+p {
+    color: white;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Plant Disease Prediction</h1>
+
+        <form method="POST" enctype="multipart/form-data">
+            <label for="file">Upload an Image:</label>
+            <input type="file" name="file" id="file" required>
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if prediction %}
+        <h2>Predicted Disease: {{ prediction }}</h2>
+        <p>Disease Info: {{ info }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>

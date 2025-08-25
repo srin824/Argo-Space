@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soil & Water Analysis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Root variables */
+        :root {
+            --primary: #0B3D91; /* NASA deep blue */
+            --accent: #FF3131;  /* NASA red */
+            --white: #FFFFFF;
+            --background: #1C1E22; /* Dark background */
+            --on-background: #E5E7EB;
+            --button-hover: #FF5757;
+            --footer-bg: #0B3D91;
+            --header-height: 80px;
+            --nav-height: 60px; /* Set a consistent nav height */
+        }
+
+        /* Global styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Nunito Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--on-background);
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        a {
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        header {
+            height: var(--header-height);
+            background-color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        header .logo {
+            color: var(--white);
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        header nav {
+            display: flex;
+            align-items: center;
+        }
+
+        header nav a {
+            margin-left: 20px;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            position: relative;
+            padding: 5px 0;
+            transition: color 0.3s;
+        }
+
+        header nav a::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: var(--accent);
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        header nav a:hover {
+            color: var(--accent);
+        }
+
+        header nav a:hover::after {
+            transform: scaleX(1);
+        }
+
+        .hero {
+            background: url('satellite-image.jpg') no-repeat center/cover;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero h1 {
+            color: var(--white);
+            font-size: 3.5rem;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+        }
+
+        .hero p {
+            color: var(--white);
+            font-size: 1.3rem;
+            margin: 20px 0;
+        }
+
+        .cta-btn {
+            background-color: var(--accent);
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .cta-btn:hover {
+            background-color: var(--button-hover);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 50px 20px;
+            background-color: var(--background);
+            text-align: center;
+        }
+
+        .features h2 {
+            color: var(--white);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .features-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .feature-item {
+            background-color: var(--primary);
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+            width: 250px;
+            color: var(--white);
+            text-align: left;
+        }
+
+        .feature-item h3 {
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+            color: var(--accent);
+        }
+
+        /* Dashboard Section */
+        .dashboard {
+            background-color: var(--background);
+            padding: 50px 20px;
+            color: var(--white);
+        }
+
+        .dashboard h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .dashboard-chart {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .chart-item {
+            width: 45%;
+            margin: 20px;
+            background-color: var(--primary);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .chart-item h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--footer-bg);
+            padding: 20px 0;
+            text-align: center;
+            color: var(--white);
+        }
+
+        footer a {
+            color: var(--white);
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">NASA Soil & Water</div>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Monitoring</a>
+        <a href="#">Data</a>
+        <a href="#">Insights</a>
+        <a href="#">Resources</a>
+    </nav>
+</header>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="content">
+        <h1>Soil & Water Analysis</h1>
+        <p>Optimize irrigation and water usage based on real-time soil moisture data.</p>
+        <button class="cta-btn">Explore Data</button>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features">
+    <h2>Features</h2>
+    <div class="features-grid">
+        <div class="feature-item">
+            <h3>Soil Moisture Monitoring</h3>
+            <p>Access real-time data on soil moisture to make irrigation decisions.</p>
+        </div>
+        <div class="feature-item">
+            <h3>Water Usage Optimization</h3>
+            <p>Optimize water usage by analyzing moisture levels across different regions.</p>
+        </div>
+        <div class="feature-item">
+            <h3>Interactive Maps</h3>
+            <p>View real-time maps displaying moisture levels and soil conditions.</p>
+        </div>
+        <div class="feature-item">
+            <h3>Weather Forecast</h3>
+            <p>Get weather forecasts with precipitation and temperature data to optimize crop management.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Dashboard Section -->
+<section class="dashboard">
+    <h2>Soil & Water Dashboards</h2>
+    <div class="dashboard-chart">
+        <div class="chart-item">
+            <h3>Soil Moisture Levels</h3>
+            <img src="chart-placeholder.jpg" alt="Soil Moisture Levels Chart">
+        </div>
+        <div class="chart-item">
+            <h3>Water Usage Trends</h3>
+            <img src="chart-placeholder.jpg" alt="Water Usage Trends Chart">
+        </div>
+    </div>
+</section>
+
+<!-- Footer Section -->
+<footer>
+    <p>&copy; 2024 NASA Soil & Water Analysis. All Rights Reserved.</p>
+    <a href="#">Privacy Policy</a> | <a href="#">Contact</a> | <a href="#">FAQs</a>
+</footer>
+
+</body>
+</html>

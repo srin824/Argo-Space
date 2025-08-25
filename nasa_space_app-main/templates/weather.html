@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App with 5-Day Forecast</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Existing CSS */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: url('../static/images/background.jpg');
+            background-size: cover;
+            background-position: center;
+            overflow: auto;
+        }
+        .container {
+            position: relative;
+            width: 400px;
+            height: 100px;
+            border-radius: 16px;
+            padding: 20px;
+            background: rgba(255, 255, 255, .1);
+            backdrop-filter: blur(30px);
+            border: 2px solid rgba(255, 255, 255, .2);
+            color: #fff;
+            transition: height .6s ease;
+        }
+        .search-box {
+            position: relative;
+            width: 100%;
+            height: 55px;
+            display: flex;
+            align-items: center;
+        }
+        .search-box i {
+            position: absolute;
+            left: 10px;
+            font-size: 28px;
+        }
+        .search-box input {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, .2);
+            outline: none;
+            border-radius: 10px;
+            font-size: 22px;
+            color: white;
+            font-weight: 500;
+            text-transform: uppercase;
+            padding: 0 48px 0 42px;
+        }
+        .search-box input::placeholder {
+            color: white;
+            text-transform: capitalize;
+        }
+        .search-box button {
+            color: white;
+            position: absolute;
+            right: 0;
+            width: 40px;
+            height: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-size: 28px;
+            padding: 0 40px 0 5px;
+            cursor: pointer;
+        }
+        .weather-box, .weather-details, .not-found {
+            overflow: hidden;
+            visibility: hidden;
+        }
+        .weather-box.active, .weather-details.active, .not-found.active {
+            visibility: visible;
+        }
+        .weather-box img {
+            width: 60%;
+        }
+        .weather-box .temperature {
+            font-size: 64px;
+        }
+        .weather-details {
+            display: flex;
+        }
+        .forecast-container {
+            margin-top: 20px;
+        }
+        .forecast-day {
+            display: flex;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, .1);
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .forecast-day img {
+            width: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="search-box">
+            <i class="fa-solid fa-location-dot"></i>
+            <input type="text" placeholder="Enter your location">
+            <button class="fa-solid fa-magnifying-glass"></button>
+        </div>
+        <p class="city-hide"></p>
+        <div class="weather-box">
+            <div class="box">
+                <div class="info-weather">
+                    <div class="weather">
+                        <img src="../static/images/cloud.png">
+                        <p class="temperature">0<span>&deg;C</span></p>
+                        <p class="description">Broken Clouds</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="weather-details">
+            <div class="humidity">
+                <i class="fa-solid fa-water"></i>
+                <span>0%</span>
+                <p>Humidity</p>
+            </div>
+            <div class="wind">
+                <i class="fa-solid fa-wind"></i>
+                <span>0Km/h</span>
+                <p>Wind Speed</p>
+            </div>
+        </div>
+
+        <!-- 5-Day Forecast -->
+        <div class="forecast-container">
+            <div id="forecast"></div>
+        </div>
+
+        <div class="not-found">
+            <div class="box">
+                <img src="../static/images/404.png">
+                <p>Oops! Location not found</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const container = document.querySelector(".container");
+        const search = document.querySelector(".search-box button");
+        const weatherBox = document.querySelector('.weather-box');
+        const weatherDetails = document.querySelector('.weather-details');
+        const forecastContainer = document.getElementById("forecast");
+        const error404 = document.querySelector('.not-found');
+        const cityHide = document.querySelector('.city-hide');
+
+        search.addEventListener('click', () => {
+            const APIKey = '####';
+            const city = document.querySelector('.search-box input').value;
+            if (city == '')
+                return;
+            
+            // Fetch current weather data
+            fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${APIKey}`)
+            .then(response => response.json())
+            .then(json => {
+                if (json.cod == '404') {
+                    cityHide.textContent = '';
+                    container.style.height = '1200px';
+                    weatherBox.classList.remove('active');
+                    weatherDetails.classList.remove('active');
+                    error404.classList.add('active');
+                    forecastContainer.innerHTML = ""; 
+                    return;
+                }
+                
+                
+                const image = document.querySelector('.weather-box img');
+                const temperature = document.querySelector('.weather-box .temperature');
+                const description = document.querySelector('.weather-box .description');
+                const humidity = document.querySelector('.weather-details .humidity span');
+                const wind = document.querySelector('.weather-details .wind span');
+                
+                switch (json.weather[0].main) {
+                    case 'Clear':
+                        image.src = '../static/images/clear.png';
+                        break;
+                    case 'Rain':
+                        image.src = '../static/images/rain.png';
+                        break;
+                    case 'Snow':
+                        image.src = '../static/images/snow.png';
+                        break;
+                    case 'Clouds':
+                        image.src = '../static/images/cloud.png';
+                        break;
+                    case 'Haze':
+                        image.src = '../static/images/mist.png';
+                        break;
+                    default:
+                        image.src = '';
+                }
+
+                temperature.innerHTML = `${parseInt(json.main.temp)}<span>&deg;C</span>`;
+                description.innerHTML = `${json.weather[0].description}`;
+                humidity.innerHTML = `${json.main.humidity}%`;
+                wind.innerHTML = `${parseInt(json.wind.speed)}Km/h`;
+                
+                cityHide.textContent = '';
+                weatherBox.classList.add('active');
+                weatherDetails.classList.add('active');
+                error404.classList.remove('active');
+                container.style.height = 'auto';
+
+                // Fetch 5-day forecast data
+                fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${APIKey}`)
+                .then(response => response.json())
+                .then(json => {
+                    forecastContainer.innerHTML="5-Day Weather Forecast"; // Clear previous forecast
+                    const forecastList = json.list.filter((item) => item.dt_txt.includes("12:00:00")); // Get only midday forecasts
+
+                    forecastList.forEach(day => {
+                        const date = new Date(day.dt_txt).toLocaleDateString("en-US", { weekday: 'long', month: 'long', day: 'numeric' });
+                        const icon = `https://openweathermap.org/img/wn/${day.weather[0].icon}.png`;
+                        const temp = `${Math.round(day.main.temp)}&deg;C`;
+                        const description = day.weather[0].description;
+
+                        const forecastElement = `
+                            <div class="forecast-day">
+                                <div>${date}</div>
+                                <div><img src="${icon}" alt="${description}"></div>
+                                <div>${temp}</div>
+                            </div>
+                        `;
+                        forecastContainer.innerHTML += forecastElement;
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

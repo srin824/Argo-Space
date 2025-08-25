@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <style>
+     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+        *{
+            font-family:'Poppins' ,sans-serif;
+        }
+        body {
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('https://t3.ftcdn.net/jpg/07/47/92/98/240_F_747929876_OdHfKJjdhVvb68QhV2q86VxFcJSaDrS0.jpg'); 
+            background-size: cover; /* Cover the entire page */
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* No repeat */
+        }
+        form {
+            color:white;
+            background-color:transparent; 
+            box-shadow:0px 0px 15px 1px black;/* White with 80% opacity */
+            position: relative;
+            padding: 25px 25px;
+            border-radius: 8%;
+            width: 350px;
+            backdrop-filter: blur(15px); /* Apply blur to the background */
+            -webkit-backdrop-filter: blur(10px); /* Safari support */
+        }
+        h1 {
+            color:white;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="password"] {
+            width: 90%;
+            padding: 10px;
+            margin:5px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            background-color: transparent;
+            border: 2px solid #ccc;
+            color:white;
+        }
+        button {
+            width: 98%;
+            margin:5px;
+            padding: 15px;
+            background-color:black;
+            color:white;
+            font-weight: bold;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: white;
+            color:black;
+            transition: 0.5s;
+        }
+        p {
+            text-align: center;
+            margin-top: 15px;
+        }
+        a {
+            color: rgb(204, 255, 0);
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        ul {
+            color: red;
+            list-style-type: none;
+            padding: 0;
+        }
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .particles i {
+            position: absolute;
+            border-radius: 3px;
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.444);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.482);
+            animation: float 20s linear infinite;
+            bottom: -150px;
+        }
+
+        .particles i:nth-child(1) {
+            left: 10%;
+            animation-duration: 10s;
+            animation-delay: 0s;
+            width: 10px;
+            height: 10px;
+        }
+
+        .particles i:nth-child(2) {
+            left: 20%;
+            animation-duration: 18s;
+            animation-delay: 2s;
+            width: 15px;
+            height: 15px;
+        }
+
+        .particles i:nth-child(3) {
+            left: 25%;
+            animation-duration: 12s;
+            animation-delay: 4s;
+        }
+
+        .particles i:nth-child(4) {
+            left: 40%;
+            animation-duration: 20s;
+            animation-delay: 0s;
+            width: 25px;
+            height: 25px;
+        }
+
+        .particles i:nth-child(5) {
+            left: 70%;
+            animation-duration: 17s;
+            animation-delay: 3s;
+            width: 12px;
+            height: 12px;
+        }
+
+        .particles i:nth-child(6) {
+            left: 80%;
+            animation-duration: 22s;
+            animation-delay: 5s;
+            width: 40px;
+            height: 40px;
+        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            form {
+                padding: 20px;
+                border-radius: 8%;
+                box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            }
+            h1 {
+                font-size: 1.5rem;
+                margin-bottom: 15px;
+            }
+            input[type="text"], input[type="password"] {
+                padding: 8px;
+                margin-bottom: 8px;
+            }
+            button {
+                padding: 12px;
+            }
+        }
+        @media (max-width: 480px) {
+            form {
+                padding: 15px;
+                border-radius: 8%;
+            }
+            h1 {
+                font-size: 1.2rem;
+                margin-bottom: 10px;
+            }
+            input[type="text"], input[type="password"] {
+                padding: 6px;
+                margin-bottom: 6px;
+            }
+            button {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles">
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+        <i></i>
+    </div>
+    <form method="POST" action="{{ url_for('login') }}">
+        <h1>Login</h1>
+        <label>Username</label>
+        <input type="text" name="username" required><br>
+        <label>Password</label>
+        <input type="password" name="password" required><br>
+        <button type="submit">Login</button>
+        <p>Don't have an account? <a href="{{ url_for('register') }}">Register here</a>.</p>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </form>
+</body>
+</html>

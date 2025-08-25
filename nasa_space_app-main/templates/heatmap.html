@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heatmap Example</title>
+    <style>
+        /* Set explicit dimensions for the heatmap container */
+        #heatmapContainer {
+            width: 800px;
+            height: 600px;
+            border: 1px solid #ccc;
+            margin: 0 auto;
+            position: relative; /* Necessary for proper heatmap positioning */
+        }
+    </style>
+    <!-- Load heatmap.js from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/heatmap.js/2.0.5/heatmap.min.js"></script>
+</head>
+<body>
+
+    <h1 style="text-align:center;">Heatmap Example</h1>
+    <div id="heatmapContainer"></div>
+
+    <script>
+        // Check if the DOM element and library loaded correctly
+        window.onload = function() {
+            // Initialize the heatmap instance
+            var heatmapInstance = h337.create({
+                container: document.getElementById('heatmapContainer'),
+                radius: 40, // Adjust radius of heatmap points
+                maxOpacity: .6,
+                minOpacity: 0,
+                blur: .75,
+            });
+
+            // Check if the container is properly sized
+            console.log(document.getElementById('heatmapContainer').offsetWidth); // Should be 800
+            console.log(document.getElementById('heatmapContainer').offsetHeight); // Should be 600
+
+            // Example heatmap data (Ensure x, y coordinates are within container bounds)
+            var data = {
+                max: 100,
+                data: [
+                    { x: 100, y: 150, value: 80 },
+                    { x: 300, y: 250, value: 50 },
+                    { x: 500, y: 350, value: 70 },
+                    { x: 200, y: 450, value: 90 },
+                    { x: 600, y: 100, value: 60 }
+                ]
+            };
+
+            // Render heatmap with data
+            heatmapInstance.setData(data);
+        };
+    </script>
+</body>
+</html>
